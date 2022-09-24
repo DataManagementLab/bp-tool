@@ -1,0 +1,13 @@
+{% extends "bp/project_info_table_row.html" %}
+
+{% load fontawesome_5 %}
+
+{% block description %}
+AG:
+{% endblock %}
+
+{% block information %}
+    <a href="mailto:{{ ag_mail }}">
+        {{ ag }}&nbsp;{% fa5_icon "envelope" "far" %}
+    </a>
+{% endblock %}

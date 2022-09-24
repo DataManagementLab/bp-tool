@@ -1,0 +1,13 @@
+{% extends "bp/project_info_table_row.html" %}
+
+{% load fontawesome_5 %}
+
+{% block description %}
+Gesamtstunden:
+{% endblock %}
+
+{% block information %}
+    <a href="{% url "bp:timetracking_project_overview" group=project.nr %}">
+        {{ total_hours_spent }}
+    </a>
+{% endblock %}

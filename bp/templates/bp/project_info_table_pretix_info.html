@@ -1,0 +1,13 @@
+{% extends "bp/project_info_table_row.html" %}
+
+{% load fontawesome_5 %}
+
+{% block description %}
+Weitere Informationen:
+{% endblock %}
+
+{% block information %}
+    <a href={{ info_url }}>
+        {{ info_url }}
+    </a>
+{% endblock %}

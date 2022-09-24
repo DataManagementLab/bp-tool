@@ -1,5 +1,5 @@
 {% load fontawesome_5 %}
-{% load tags_info %}
+{% load tags_project_info_table %}
 
 <table class="table">
     {% comment The idea for this table is to eventually look like this: %}
@@ -17,17 +17,15 @@
         {% member_info %}
     </tr>
     <tr>
-        <td>AG:</td><td><a href="mailto:{{ project.ag_mail }}">{{ project.ag }}&nbsp;{% fa5_icon "envelope" "far" %}</a></td>
+        {% ag_info %}
     </tr>
     <tr>
-        <td>Weitere Informationen:</td><td><a href={{ info_url }}>{{ info_url }}</a></td>
+        {% pretix_info %}
     </tr>
-    {% if project.ag_points >= 0 %}
-        <tr>
-            <td>Bewertung:</td><td><b>{{ project.ag_points }} Punkte</b><br><br>{{ project.ag_points_justification|linebreaks }}</td>
-        </tr>
-    {% endif %}
     <tr>
-        <td>Gesamtstunden:</td><td><a href="{% url "bp:timetracking_project_overview" group=project.nr %}">{{ total_hours_spent }}</a></td>
+        {% grade_info %}
+    </tr>
+    <tr>
+        {% hours_info %}
     </tr>
 </table>

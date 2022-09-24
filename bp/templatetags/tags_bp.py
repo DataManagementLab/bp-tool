@@ -6,7 +6,6 @@ from django.utils.safestring import mark_safe
 from bp.models import TLLog
 
 from bp.grading.ag.views import ProjectGradesMixin
-from bp.pretix import get_pretix_projectinfo_url
 
 register = template.Library()
 
@@ -78,8 +77,6 @@ class RenderTagNode(template.Node):
 def project_info_table(context):
     return {
         'project' : context['project'],
-        'info_url' : get_pretix_projectinfo_url(context['project']),
-        'total_hours_spent' : context['project'].total_hours,
     }
 
 @register.inclusion_tag('bp/project_info_tabs.html', takes_context=True)
