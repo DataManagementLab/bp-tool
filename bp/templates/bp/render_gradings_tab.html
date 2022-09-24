@@ -1,0 +1,10 @@
+
+Gültige Bewertung ist blau markiert
+{% if gradings_after_count > 0 %}
+<p>Verspätete Bewertungen:</p>
+    {% include "bp/render_gradings.html" with gradings=gradings_after valid_pk=valid_grade_after %}
+{% endif %}
+{% if gradings_before_count > 0 %}
+<p>Rechtzeitige Bewertungen:</p>
+    {% include "bp/render_gradings.html" with gradings=gradings_before valid_pk=valid_grade_before %}
+{% endif %}

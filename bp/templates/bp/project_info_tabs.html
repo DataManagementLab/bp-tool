@@ -1,47 +1,80 @@
-{% include "bp/render_all_gradings.html" %}
+<ul class="nav nav-tabs">
+    <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab"
+           href="#g_logs">
+            Logs ({{ log_count }})
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link " data-toggle="tab"
+           href="#g_orgalogs">
+            Orga-Logs ({{ orga_log_count }})
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link " data-toggle="tab"
+           href="#g_grades">
+            Alle Bewertungen ({{ gradings_count }})
+        </a>
+    </li>
+</ul>
 
-<h2>Orga-Logs ({{ orga_log_count }})</h2>
+<div id="myTabContent" class="tab-content">
 
-{% if orga_log_count > 0 %}
-    {% include "bp/render_orga_logs.html" with logs=orga_logs %}
-{% else %}
+    <div class="tab-pane fade active show" id="g_logs">
+        <h3 class="my-4">Logs ({{ log_count }})</h3>
 
-{% endif %}
+		{% if log_count > 0 %}
+		    <canvas id="statusChart" width="100%" height="15vh" class="mb-5"></canvas>
+		    <script>
+		        const ctx = $('#statusChart');
+		        const myChart = new Chart(ctx, {
+		            type: 'line',
+		            data: {
+		                datasets: [{
+		                    label: 'status',
+		                    data: {{project.status_json_string|safe}},
+		                    backgroundColor: '#1F9BCF',
+		                    borderColor: '#1F9BCF',
+		                    borderWidth: 1
+		                }]
+		            },
+		            options: {
+		                scales: {
+		                    y: {
+		                        suggestedMin: -2,
+		                        suggestedMax: 2
+		                    }
+		                },
+		                plugins: {
+		                    legend: {
+		                        display: false
+		                    }
+		                }
+		            }
+		        });
+		        </script>
+		    {% include "bp/render_logs.html" with logs=logs %}
+		{% else %}
 
-<h2>Logs ({{ log_count }})</h2>
+		{% endif %}
 
-{% if log_count > 0 %}
-    <canvas id="statusChart" width="100%" height="15vh" class="mb-5"></canvas>
-    <script>
-        const ctx = $('#statusChart');
-        const myChart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                datasets: [{
-                    label: 'status',
-                    data: {{project.status_json_string|safe}},
-                    backgroundColor: '#1F9BCF',
-                    borderColor: '#1F9BCF',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        suggestedMin: -2,
-                        suggestedMax: 2
-                    }
-                },
-                plugins: {
-                    legend: {
-                        display: false
-                    }
-                }
-            }
-        });
-        </script>
-    {% include "bp/render_logs.html" with logs=logs %}
-{% else %}
+    </div>
 
-{% endif %}
+    <div class="tab-pane fade" id="g_orgalogs">
+		<h3 class="my-4">Orga-Logs ({{ orga_log_count }})</h3>
 
+		{% if orga_log_count > 0 %}
+		    {% include "bp/render_orga_logs.html" with logs=orga_logs %}
+		{% else %}
+
+		{% endif %}
+    </div>
+
+    <div class="tab-pane fade" id="g_grades">
+		<h3 class="my-4">Alle Bewertungen ({{ gradings_count }})</h3>
+
+		{% include "bp/render_gradings_tab.html" %}
+    </div>
+
+</div>
