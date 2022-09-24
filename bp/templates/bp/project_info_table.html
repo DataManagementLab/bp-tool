@@ -1,12 +1,20 @@
 {% load fontawesome_5 %}
+{% load tags_info %}
 
 <table class="table">
+    {% comment The idea for this table is to eventually look like this: %}
+    {% for info in infos %}
+        <tr>
+            {% info %}
+        </tr>
+    {% endfor %}
+    {% endcomment %}
+
     <tr>
-        <td>TL:</td><td>{% if project.tl %}<a href="{% url "bp:tl_detail" pk=project.tl.pk %}">{{ project.tl }}</a>{% else %}-{% endif %}</td>
+        {% tl_info %}
     </tr>
     <tr>
-        <td>Mitglieder:</td><td><a href="mailto:{{ project.student_mail }}">{{ project.student_list }}&nbsp;{% fa5_icon "envelope" "far" %}</a><br>
-                                {{ project.student_mail }}</td>
+        {% member_info %}
     </tr>
     <tr>
         <td>AG:</td><td><a href="mailto:{{ project.ag_mail }}">{{ project.ag }}&nbsp;{% fa5_icon "envelope" "far" %}</a></td>

@@ -1,0 +1,13 @@
+{% extends "bp/project_info_table_row.html" %}
+
+{% block description %}
+TL:
+{% endblock %}
+
+{% block information %}
+    {% if tl %}
+        <a href="{% url "bp:tl_detail" pk=tl.pk %}">{{ tl }}</a>
+    {% else %}
+        -
+    {% endif %}
+{% endblock %}

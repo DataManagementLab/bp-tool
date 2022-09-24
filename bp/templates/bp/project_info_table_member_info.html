@@ -1,0 +1,14 @@
+{% extends "bp/project_info_table_row.html" %}
+
+{% load fontawesome_5 %}
+
+{% block description %}
+Mitglieder:
+{% endblock %}
+
+{% block information %}
+    <a href="mailto:{{ student_mails }}">
+        {{ student_list }}&nbsp;{% fa5_icon "envelope" "far" %}
+    </a><br>
+    {{ student_mails }}
+{% endblock %}
