@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block tl_content %}
-    <h4 class="my-4">{{ project.nr }}: {{ project.title }} - Zeitintervall erstellen</h4>
+    <h3 class="my-4">{{ project.nr }}: {{ project.title }}</h3>
     <turbo-frame id="form">
         <form method="POST" class="post-form">{% csrf_token %}
             {% bootstrap_form form %}

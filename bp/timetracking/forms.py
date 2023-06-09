@@ -130,20 +130,6 @@ class TimeIntervalUpdateForm(forms.ModelForm):
         model = TimeInterval
         fields = ['name', 'start', 'end']
 
-        widgets = {
-            'start': forms.DateInput(attrs={'type': 'date'}, format='%Y-%m-%d'),
-            'end': forms.DateInput(attrs={'type': 'date'}, format='%Y-%m-%d'),
-        }
-
-    def clean(self):
-        cleaned_data = super().clean()
-
-        if cleaned_data.get('end', None) and cleaned_data.get('start', None):
-            if cleaned_data['end'] < cleaned_data['start']:
-                self.add_error('end', "Ende muss später als Beginn sein")
-
-        return cleaned_data
-
 class TimeIntervalEntryForm(forms.ModelForm):
     class Meta:
         model = TimeTrackingEntry

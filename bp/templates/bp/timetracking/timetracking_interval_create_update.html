@@ -3,25 +3,16 @@
 {% load bootstrap4 %}
 {% load fontawesome_5 %}
 
-{% block breadcrumbs %}
-    <li class="breadcrumb-item"><a href="{% url "bp:index" %}">Übersicht</a></li>
-    <li class="breadcrumb-item"><a href="{% url "bp:timetracking_tl_start" %}">Zeiterfassung</a></li>
-    <li class="breadcrumb-item"><a href="{% url "bp:timetracking_project_overview" group=project.nr %}">{{ project.nr }}: {{ project.title }}</a></li>
-    <li class="breadcrumb-item"><a href="{% url "bp:timetracking_intervals" group=project.nr %}">Intervallverwaltung</a></li>
-    <li class="breadcrumb-item active">Intervall bearbeiten</li>
-{% endblock %}
-
 {% block tl_content %}
-    <h4 class="my-4">{{ project.nr }}: {{ project.title }} - Zeitintervall bearbeiten</h4>
+    <p>Zeitintervall anzeigen und eintragen:</p>
+
     <form method="POST" class="post-form">{% csrf_token %}
         {% bootstrap_form form %}
         {% buttons %}
             <button type="submit" class="save btn btn-primary float-right">
                 {% fa5_icon "check" 'fas' %} Speichern
             </button>
-            <a href="{% url "bp:timetracking_intervals" timeinterval.group.nr %}" class="btn btn-warning float-left">
-                Abbrechen
-            </a>
+            <a href="{% url "bp:timetracking_intervals" timeinterval.group.nr %}" class="btn btn-warning float-left">Abbrechen</a>
         {% endbuttons %}
     </form>
 {% endblock %}
